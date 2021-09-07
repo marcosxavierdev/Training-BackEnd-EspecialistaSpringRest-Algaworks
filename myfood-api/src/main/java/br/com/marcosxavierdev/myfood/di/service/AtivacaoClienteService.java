@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import br.com.marcosxavierdev.myfood.di.model.Cliente;
 import br.com.marcosxavierdev.myfood.di.notification.Notificador;
 
-@Component
 public class AtivacaoClienteService {
 	
 	private Notificador Notificador;
