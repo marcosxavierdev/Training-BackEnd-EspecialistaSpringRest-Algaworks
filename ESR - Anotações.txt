@@ -1,0 +1,75 @@
+Especialista Spring Rest
+
+
+# Web services x Apis
+Web api - web service é uma api que fornece sua interface de comunicação pela internet
+
+# jpa/hibernate > jpa especificação / hibernate implementação
+
+# componentes spring usados no projeto
+
+spring web
+
+
+
+# Sempre apos iniciar um projeto, fazer um maven update
+maven > updade project > marcar force update of snapshots
+
+# Gerar Build (para rodar de forma externa) na pasta target
+> run as > maven build > goals: package
+
+# Dependency Hierarchy > dependencias trasitivas
+
+# @ResponseBody (anotação do metodo) > indica que o retorno seja devolvido como a resposta da requisição
+
+# o Spring separa os recursos em dois class loaders (classe que le as estruturas e as deixa na memoria): base (o que nao se altera 
+durante o desenvolvimento) e restart (o que é desenvolvido)
+
+# 2.9 - Injeção de Dependencia > usado para diminuir o nivel de acoplamento do sistema, onde o objetivo é não instanciar objetos que 
+realizam funções que podem futuramente ser alteradas dentro de uma classe e sim deixar a responsabilidade dessa instanciação para 
+quem chama a classe.
+
+normalmente é usadas interfaces (no caso, dependencias) para fazer esse trabalho de criar uma referencia 
+entre os possiveis objetos a serem instanciados.
+
+EX: ao inves de instanciar notificadorEmail ou notificadorSMS na classe AtivacaoClienteservice, 
+injetamos uma variavel da interface Notificador (implelemtada por ambas), 
+
+onde o proprio construtor da ativacaoClienteService vai receber por parametro (o tipo de notificador) 
+quando for chamada uma AtivacaoClienteservice no main.
+
+# 2.11 - @Component (anotação da classe) > indica que essa classe é um componente bean spring (para fazer a injeção de dependencias)
+@Component, @ Controller, @Service e @Repository (são anotações para classes que podem ser injetadas em outras classes)
+
+# 2.13 - @Configuration (anotação da classe) > Component spring com a função de definir beans, 
+ou seja aplicar configurações a interface que sera injetada no service;
+ex: vai configurar a interface notificador, antes dela ser injetada na AtivacaoClienteservice 
+
+@Bean > declara que aquele metodo esta substituindo a anotação @Component e aplicando uma configuração no bean respectivo 
+(já que a classe necessita perder a anotação @Component, o container spring ira procurar esse metodo para gerenciar a 
+injeção daquela Dependencia)
+
+dificulmente vc conseguira manter uma classe para configurar muitos beans, ideal é que cada agrupamento de classes que implementem 
+uma interface tenha sua @Configuration
+
+# 2.14 - @Autowired (anotação do atributo) > indica ao Spring que aquele é um ponto de injeção
+
+pode ser usado no construtor, num set ou no proprio atributo. Sendo o ideal no construtor pois mostra as dependencias obrigatorias 
+daquela classe. Sendo o mais usado é no atributo, porem atrapalha posteriormente os testes;
+
+2.15 - Dependencias opcionais @Autowired (required = false)
+
+2.16 - quando uma interface que possua duas (ou varias) beans for injetada (ambiguidade) , 
+o spring alertará que é necessario resolver esse problema (desambiguação, já que somente uma deve estar disponivel para aquele momento) com:
+
+2.16 - via lista de beans (não utilizado por varios problemas);
+2.17 - via @primary (anotação da classe) - que define a preferencia daquela bean
+2.18 - via @Qualifier("identificador") (anotação da classe) - que precisa ser citada na @Autowired
+2.19 - via criação de uma anotação (anotação da metodo quando for usada) para receber uma enum com status (para ser chaveada entre as beans), 
+com o intuito de a alterar a @Qualifier (anotação da classe) de acordo com a necessidade do momento (necessario usar a @Retention  (anotação da classe) 
+para que a nova anotação seja executada)
+
+2.20 - Spring Profiles
+
+
+###### ULTIMA AULA - 2.16
