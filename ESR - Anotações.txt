@@ -69,7 +69,15 @@ o spring alertará que é necessario resolver esse problema (desambiguação, j�
 com o intuito de a alterar a @Qualifier (anotação da classe) de acordo com a necessidade do momento (necessario usar a @Retention  (anotação da classe) 
 para que a nova anotação seja executada)
 
-2.20 - Spring Profiles
+2.20 - Spring Profiles - é possivel fazer com que o spring crie ambientes distintos (prod e dev) e que alguns elementos sejam apenas reconhecidos 
+no ambiente em que for designado. com o @Profile("dev").
+
+ambientes podem ser definidos em:
+application.properties > spring.profiles.active=prod - com o perfil atual, que pode ser alterado
+open config na aba spring dashboard > profile
+
+interessante para bancos de dados
 
 
-###### ULTIMA AULA - 2.16
+
+###### ULTIMA AULA - 2.20

@@ -26,3 +26,15 @@ public class MeuPrimeiroController {
 	}
 
 }
+
+/*	<AC> annotation de classe
+ * 	<AM> annotation de metodo
+ * 
+ *	<AC> @Controller - define que a classe é um controlador (é uma bean - objeto injetável)
+ * 
+ *	<AM> @GetMapping("/hello") - mapeamento de metodo GET
+ * 
+ *	<AM> @ResponseBody - indica que o retorno seja devolvido como a resposta da requisição
+ * 
+ * 
+ * */

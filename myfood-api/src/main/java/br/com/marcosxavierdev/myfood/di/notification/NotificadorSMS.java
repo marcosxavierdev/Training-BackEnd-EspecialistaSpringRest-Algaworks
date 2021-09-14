@@ -15,3 +15,17 @@ public class NotificadorSMS implements Notificador {
 	}
 
 }
+
+
+/*	Classe (bean) criada a partir da interface Notificador que quando executada (na service) irá gerar uma notificação via SMS,
+ * 	assim que um cliente for ativado (no controller), sendo necessario que o nivel de urgencia esteja definido como URGENTE (via anotação).
+ * 
+ * 	<AC> annotation de classe
+ *
+ * 	<AM> annotation de metodo
+
+ *	<AC> @Component - indica ao spring que essa classe é uma bean (generica)
+ *
+ *	<AC> @TipoDoNotificador(value = NivelUrgencia.URGENTE) - valor do @TipoDoNotificador definido que representará a bean quando a injeção for chamada
+ * 
+ * */

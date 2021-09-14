@@ -34,3 +34,11 @@ public class Cliente {
 	}
 	
 }
+
+
+/* 	<AC> annotation de classe
+ * 	<AM> annotation de metodo
+ * 
+ * 
+ * 
+ * */
