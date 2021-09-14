@@ -57,9 +57,9 @@ uma interface tenha sua @Configuration
 pode ser usado no construtor, num set ou no proprio atributo. Sendo o ideal no construtor pois mostra as dependencias obrigatorias 
 daquela classe. Sendo o mais usado é no atributo, porem atrapalha posteriormente os testes;
 
-2.15 - Dependencias opcionais @Autowired (required = false)
+# 2.15 - Dependencias opcionais @Autowired (required = false)
 
-2.16 - quando uma interface que possua duas (ou varias) beans for injetada (ambiguidade) , 
+# 2.16 - quando uma interface que possua duas (ou varias) beans for injetada (ambiguidade) , 
 o spring alertará que é necessario resolver esse problema (desambiguação, já que somente uma deve estar disponivel para aquele momento) com:
 
 2.16 - via lista de beans (não utilizado por varios problemas);
@@ -69,7 +69,7 @@ o spring alertará que é necessario resolver esse problema (desambiguação, j�
 com o intuito de a alterar a @Qualifier (anotação da classe) de acordo com a necessidade do momento (necessario usar a @Retention  (anotação da classe) 
 para que a nova anotação seja executada)
 
-2.20 - Spring Profiles - é possivel fazer com que o spring crie ambientes distintos (prod e dev) e que alguns elementos sejam apenas reconhecidos 
+# 2.20 - Spring Profiles - é possivel fazer com que o spring crie ambientes distintos (prod e dev) e que alguns elementos sejam apenas reconhecidos 
 no ambiente em que for designado. com o @Profile("dev").
 
 ambientes podem ser definidos em:
@@ -78,6 +78,30 @@ open config na aba spring dashboard > profile
 
 interessante para bancos de dados
 
+# 2.21 - Ciclo de vida das beans (inicialização, onde sera usado, destruição)
 
+@PostConstruct - anotação que indica o inicio do ciclo de vida da bean (depois do construtor)
+@PreDestroy - anotação que indica instantes antes do fim do ciclo de vida da bean (quando parar a aplicação)
+	
+numa classe @Configuration > @Bean(initMethod = "init", destroyMethod="destroy")
 
-###### ULTIMA AULA - 2.20
+com a interface InitializingBean ou DisposableBean
+
+# 2.22 - Events e Listeners > recursos que podem diminuir o acoplamento entre classes e extrair responsabilidades que uma classe esteja assumindo, 
+mas que possa ser executada por outra (AtivacaoClienteservice não precisa saber que precisa notificar quando ativar um cliente).
+
+Event > recurso responsavel por publicar uma mensagem em alguma rotina (sem saber pra quem e nem aguarda resposta)
+
+//injeção da classe reponsavel pela publicação
+@Autowired private ApplicationEventPublisher applicationEventPublisher;
+//chamada do metodo de irá disparar o evento
+applicationEventPublisher.publishEvent(new ClienteAtivadoEvent(cliente));
+
+Listener > classe que irá tratar o evento que capturar
+
+@EventListener > indica que a classe é uma listener, que receberá um event e fará o tratamento da mesma
+
+OBS: quando for necessario adicionar funcionalidade ao sistema, é interessante usar event/listeners, 
+pois quando uma determinada ação é realizada é so criar uma metodo listener que escute aquele evento e faça seu tratamento.
+
+###### ULTIMA AULA - 2.22
