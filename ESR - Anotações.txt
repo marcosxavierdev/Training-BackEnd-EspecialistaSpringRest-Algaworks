@@ -80,10 +80,10 @@ interessante para bancos de dados
 
 # 2.21 - Ciclo de vida das beans (inicialização, onde sera usado, destruição)
 
-@PostConstruct - anotação que indica o inicio do ciclo de vida da bean (depois do construtor)
-@PreDestroy - anotação que indica instantes antes do fim do ciclo de vida da bean (quando parar a aplicação)
+@PostConstruct (anotação da atributo) - anotação que indica o inicio do ciclo de vida da bean (depois do construtor)
+@PreDestroy (anotação da atributo) - anotação que indica instantes antes do fim do ciclo de vida da bean (quando parar a aplicação)
 	
-numa classe @Configuration > @Bean(initMethod = "init", destroyMethod="destroy")
+numa classe @Configuration (anotação da classe) > (anotação da classe) @Bean(initMethod = "init", destroyMethod="destroy")
 
 com a interface InitializingBean ou DisposableBean
 
@@ -103,5 +103,46 @@ Listener > classe que irá tratar o evento que capturar
 
 OBS: quando for necessario adicionar funcionalidade ao sistema, é interessante usar event/listeners, 
 pois quando uma determinada ação é realizada é so criar uma metodo listener que escute aquele evento e faça seu tratamento.
+
+# 2.23 > Configurando com o application properties (arquivo padrão de configuração) 
+
+padrão > chave=valor
+
+https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html
+
+# 2.25 > para criar propriedades customizadas é necessário serguir esse padrão
+
+application.properties > é interessante criar a configuração seguindo esse padrão abaixo, como se fossem grupos
+notificador.email.host-servidor=smtp.myfood.com.br
+
+na classe que será vinculada a propriedade que esta sendo configurada em application.properties é necessario fazer a seguinte injeção
+@Value("${notificador.email.host-servidor}") (anotação da atributo)
+
+para organizar melhor propriedades customizadas é possivel criar uma classe que represente um grupo de configurações, usando as anotações
+
+@Component (anotação da classe)
+@ConfigurationProperties("notificador.email") (anotação da classe) - indica que esta classe representa um arquivo de configuração que sera gerenciado no 
+Application.properties e que serão agrupadas pelo prefixo "notificador.email".
+
+e usar a injeção desta classe quando for necessario usar essa configutação
+@Autowired  private NotificadorProperties properties;
+
+pode-se importar a dependencia "configuration-processor" para fazer autocomplete de propriedades customizadas. 
+
+# 2.27 - para chavear configurações de projeto em multiplos ambientes (spring profile) é possivel criar varios arquivos de propriedades 
+(application.properties) que podem possuir configurações distintas para cada ambiente escolhido
+
+application-develop.properties > padrão do nome para um novo application.properties(application-profile ativo do spring profile.properties)
+
+
+
+
+
+
+
+
+
+
+
 
 ###### ULTIMA AULA - 2.22
